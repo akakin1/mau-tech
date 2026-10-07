@@ -1,0 +1,52 @@
+@use "sass:map";
+
+// Header
+$header_padding: 2.7vw;
+$aWidth: 6em;
+$heightOver: 0.1em;
+$widthOver: 0.37rem;
+$borderHeight: 70%;
+$profileIMGwrap_size: calc(var(--header_height) + 0.4em);
+$header_height: calc(var(--header_height) + $header_padding * 2);
+
+// Blog
+$main_width: 44rem;
+$postSection_gap_h: 1vh;
+$postSection_gap_v: 2.5vw;
+$postList_padding: 1.5vh;
+$postList_gap: 1.3vw;
+$postList_height: max(25vh, calc(7.5rem * 3 + $postList_gap * 2));
+
+// All
+$main_padding: 3vw;
+$main_marginTop: calc($header_height - $header_padding + $main_padding - 0.5vw);
+
+@mixin hover {
+	@media (any-hover: hover) {
+		&:hover {
+			@content;
+		}
+	}
+}
+@mixin flex($flow: _, $justify-content: _, $align-items: _) {
+	display: flex;
+	@if $flow != "_" {
+		flex-flow: $flow;
+	}
+	@if $justify-content != "_" {
+		justify-content: $justify-content;
+	}
+	@if $align-items != "_" {
+		align-items: $align-items;
+	}
+}
+
+$breakpoints: (
+	"sm": "screen and (max-width: 600px)",
+	"xl": "screen and (min-width: 600px)",
+) !default;
+@mixin MQ($breakpoint: sm) {
+	@media #{map.get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}

@@ -1,0 +1,28 @@
+.animeBG {
+	background: linear-gradient(
+		60deg,
+		var(--gradient_0),
+		var(--gradient_1),
+		var(--gradient_2)
+	);
+	trasition: background 0.05s;
+	will-chage: background;
+}
+.animeBG_before {
+	&::before {
+		@extend .animeBG;
+	}
+}
+.animeBG_after {
+	&::after {
+		@extend .animeBG;
+	}
+}
+.animeBG_font {
+	@extend .animeBG;
+	transition: -webkit-text-fill-color 0.2s, opacity 0.2s;
+	-webkit-background-clip: text;
+	@include hover {
+		-webkit-text-fill-color: transparent;
+	}
+}

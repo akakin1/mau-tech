@@ -1,0 +1,124 @@
+:root {
+
+	--100vh: 100vh;
+	@supports (height: 100dvh) {
+		--100vh: 100dvh;
+	}
+
+	--100svh: 100vh;
+
+	@supports (height: 100svh) {
+		--100svh: 100svh;
+	}
+
+	--baseFont: -apple-system,
+	BlinkMacSystemFont,
+	Segoe UI,
+	Roboto,
+	Oxygen,
+	Ubuntu,
+	Cantarell,
+	Fira Sans,
+	Droid Sans,
+	Helvetica Neue,
+	sans-serif;
+	--baseFont_monospace: Menlo,
+	Monaco,
+	Lucida Console,
+	Liberation Mono,
+	DejaVu Sans Mono,
+	Bitstream Vera Sans Mono,
+	Courier New,
+	monospace;
+	--subMenu_width: 2rem;
+	--header_height: 2.3rem;
+	--header_padding: 1.5rem;
+	--header_subMenu_iconSize: 1rem;
+	--header_subMenu_icon_padding: 1.2rem 0;
+	--blog_tagList_opacity: 0.4;
+
+	@media (max-width: 500px) {
+		--subMenu_width: 2.7rem;
+		--header_height: 2.7rem;
+		--header_padding: 0.5rem;
+		--header_subMenu_iconSize: 1.3rem;
+		--header_subMenu_icon_padding: 1.7rem 0;
+	}
+}
+
+$theme-colors: (
+	--c_font: (#1d1d1d,
+		#eeeeee,
+	),
+	--c_bg_body: (#f2f2f2,
+		#212121,
+	),
+	--c_bg: (#f2f2f2,
+		#3e3e3e,
+	),
+	--c_bg_menu: (#f2f2f2,
+		#f2f2f2,
+	),
+);
+
+@function hexToRGB($hex) {
+	@return color.channel($hex, "red", $space: rgb),
+	color.channel($hex, "green", $space: rgb),
+	color.channel($hex, "blue", $space: rgb);
+}
+
+html {
+
+	@each $name,
+	$color in $theme-colors {
+		#{$name}: #{list.nth($color, 1)};
+		#{$name}_rgb: #{hexToRGB(list.nth($color, 1))};
+		#{$name}_light: #{list.nth($color, 1)};
+		#{$name}_light_rgb: #{hexToRGB(list.nth($color, 1))};
+		#{$name}_dark: #{list.nth($color, 2)};
+		#{$name}_dark_rgb: #{hexToRGB(list.nth($color, 2))};
+		#{$name}_reversal: #{list.nth($color, 2)};
+		#{$name}_reversal_rgb: #{hexToRGB(list.nth($color, 2))};
+
+		&[data-darkmode="true"] {
+			#{$name}: #{list.nth($color, 2)};
+			#{$name}_rgb: #{hexToRGB(list.nth($color, 2))};
+			#{$name}_reversal: #{list.nth($color, 1)};
+			#{$name}_reversal_rgb: #{hexToRGB(list.nth($color, 1))};
+		}
+	}
+}
+
+$theme-variable: (
+	--shadow_menu: (0 0 0.3rem 0 rgba(0, 0, 0, 0.2),
+		0 0 0.3rem 0 rgba(0, 0, 0, 0.8),
+	),
+	--shadow_menuSub: (0 0 1.5rem 0 rgba(0, 0, 0, 0.2),
+		0 0 0.3rem 0 rgba(0, 0, 0, 0.8),
+	),
+	--shadow_menuHover: (0 0 0.1rem 0 rgba(0, 0, 0, 0.3),
+		0 0 0.1rem 0 rgba(0, 0, 0, 0.8),
+	),
+	--shadow_menuHoverSub: (0 0 0.5rem 0 rgba(0, 0, 0, 0.2),
+		0 0 0.3rem 0 rgba(0, 0, 0, 0.8),
+	),
+	--shadow_menuActive: (0 0 0.4rem 0 rgba(0, 0, 0, 0.4),
+		0 0 0.4rem 0 rgba(0, 0, 0, 0.9),
+	),
+);
+
+html {
+
+	@each $name,
+	$e in $theme-variable {
+		#{$name}: #{list.nth($e, 1)};
+		#{$name}_light: #{list.nth($e, 1)};
+		#{$name}_dark: #{list.nth($e, 2)};
+		#{$name}_reversal: #{list.nth($e, 2)};
+
+		&[data-darkmode="true"] {
+			#{$name}: #{list.nth($e, 2)};
+			#{$name}_reversal: #{list.nth($e, 1)};
+		}
+	}
+}

@@ -1,0 +1,9 @@
+/works / 307
+/blog/web/:slug /blog/:slug 301
+/blog/gadget/:slug /blog/:slug 301
+/blog/camera/:slug /blog/:slug 301
+/blog/other/:slug /blog/:slug 301
+/blog/web/:slug/ /blog/:slug 301
+/blog/gadget/:slug/ /blog/:slug 301
+/blog/camera/:slug/ /blog/:slug 301
+/blog/other/:slug/ /blog/:slug 301

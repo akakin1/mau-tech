@@ -1,0 +1,212 @@
+html,
+body {
+	// min-height: 100vh;
+	font-family: var(--baseFont);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
+}
+
+// Keep the fixed Works overlay inside a viewport-sized root. iOS Safari can
+// clip fixed descendants to the body's content height when the root only
+// contains the header in normal flow.
+html,
+body,
+#__next {
+	height: 100%;
+	min-height: 100%;
+}
+
+html {
+	font-size: 15px;
+	color: var(--c_font);
+	background: var(--c_bg_body);
+	transition: color 0.3s, background 0.3s;
+	will-change: color, background;
+
+	@keyframes accentC {
+		$num: 10;
+
+		@for $i from 1 through $num {
+			$hsla: math.div(360, $num) * $i;
+
+			#{math.div(100, $num) * $i}% {
+				--c_accent: hsla($hsla, 100%, 75%, 1);
+			}
+		}
+	}
+
+	&[data-header="false"] {
+		header {
+			display: none;
+		}
+	}
+
+	&[data-darkmode="true"] {
+		color-scheme: dark;
+	}
+}
+
+body {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	--gradient_0: hsl(0.5, 100%, 70%);
+	--gradient_1: hsl(33.833333333333336, 100%, 70%);
+	--gradient_2: hsl(67.16666666666667, 100%, 70%);
+}
+
+iframe,
+img,
+canvas {
+	border: none;
+	outline: none;
+}
+
+#wrap {
+	transition: 0.3s opacity, 0.3s filter;
+}
+
+#tagList {
+	@include hover {
+		&+#wrap {
+			opacity: 0.5;
+			filter: blur(10px);
+		}
+	}
+}
+
+.load {
+	pointer-events: none;
+	position: fixed;
+	$size: max(6rem, 9vw);
+	left: calc(50% - $size / 2);
+	top: calc(50% - $size / 2);
+	width: $size;
+	height: $size;
+	// stroke: var(--c_bg_reversal);
+	stroke: var(--gradient_1);
+	will-change: stroke;
+}
+
+main {
+	padding: 0 $main_padding;
+	margin-top: $main_marginTop;
+
+	@media (max-width: 800px) {
+		margin-top: $main_padding;
+		margin-bottom: $main_marginTop;
+	}
+
+	// transform: translateY(50vh);
+	opacity: 0;
+	transition: opacity 0.1s;
+	will-change: opacity;
+
+	&.false {
+		// transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.loading {
+	opacity: 0;
+
+	// transition: .1s .3s;
+	&.true {
+		opacity: 1;
+		// transition-delay: 0s;
+	}
+}
+
+// footer {
+// 	text-align: right;
+// 	padding: 2vh $header_padding;
+
+// 	@media (max-width: 800px) {
+// 		margin-bottom: $main_marginTop;
+// 	}
+// }
+
+.blog {
+	ul::after {
+		transform: translateX(calc(100% - $widthOver * 2));
+	}
+}
+
+.about {
+	ul::after {
+		transform: translateX(calc(200% - $widthOver * 4));
+	}
+}
+
+// bloggerから引き継ぎ
+.blog-card-left img,
+.blog-card-right img,
+.hitokoto-talk img,
+.last-comment a {
+	display: none !important;
+}
+
+.blog-card-left,
+.blog-card-right {
+	margin-bottom: 0.3em;
+}
+
+.diff {
+	display: flex;
+	place-items: center;
+}
+
+// Hugo
+mobile-scroll {
+	overflow: hidden;
+	overflow-x: auto;
+}
+
+.kooookoku {
+	width: 100vw;
+	height: var(--100vh);
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	position: fixed;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+
+	>div {
+		pointer-events: auto;
+		background-color: rgba(var(--c_bg_body_reversal_rgb), .3);
+
+		--width: 300px;
+		--height: 250px;
+
+		@media (max-width:(660px + 300px * 2 + 100px)) {
+			--width: 720px;
+			--height: 90px;
+			margin: auto;
+		}
+
+		@media (max-width:(720px + 30px)) {
+			--width: 300px;
+			--height: 50px;
+			display: none;
+		}
+
+		width: var(--width);
+		height: var(--height);
+
+		&:nth-child(even) {
+			@media (max-width:(660px + 300px * 2 + 100px)) {
+				display: none;
+			}
+		}
+
+		.adsbygoogle {
+			width: var(--width);
+			height: var(--height);
+		}
+	}
+}

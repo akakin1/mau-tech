@@ -1,0 +1,5 @@
+{
+  "name": "2001y-restoration-host",
+  "private": true,
+  "scripts": { "build": "node scripts/build-restoration.mjs" }
+}

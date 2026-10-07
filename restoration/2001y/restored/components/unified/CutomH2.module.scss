@@ -1,0 +1,16 @@
+.adsence {
+    --width: 728px;
+    --height: 90px;
+
+    @media (max-width:728px) {
+        --width: 300px;
+        --height: 50px;
+    }
+
+    width: var(--width);
+    height: var(--height);
+    min-height: var(--height);
+    margin: auto;
+    background-color: rgba(var(--c_bg_body_reversal_rgb), .3);
+    margin: 0 calc(50% - var(--width)/2);
+}

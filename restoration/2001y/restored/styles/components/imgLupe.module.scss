@@ -1,0 +1,32 @@
+.view {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+.wrapper {
+	--base: 90vmax;
+	width: var(--base);
+	height: calc(var(--base) * var(--height) / var(--width));
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	will-change: transform;
+	transform: translate3d(
+		calc(-1% * var(--positionX) + (100vw - 40rem) / 2),
+		calc(-1% * var(--positionY) + 50vh),
+		0
+	);
+	opacity: 0;
+	&.open {
+		opacity: 1;
+	}
+	* {
+		width: 100% !important;
+		height: 100% !important;
+	}
+}

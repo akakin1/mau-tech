@@ -1,0 +1,103 @@
+.timeline {
+	--section_spacing: 4em;
+
+	--section-line_spacing: 1.5em;
+
+	--line_width: 2px;
+	--line_spacing: 12px;
+	--line_curvature: 1.2;
+
+	display: flex;
+	flex-flow: column;
+	flex-direction: column-reverse;
+	gap: var(--section_spacing);
+
+	--line_count: calc(var(--max) - var(--min) + 1);
+	--lines_width: calc(var(--line_count) * var(--line_spacing) + var(--line_width) / 2);
+	margin-right: calc(var(--lines_width) * 1.5);
+	transform: translateX(-50%);
+
+	section {
+		.data {
+			display: flex;
+			flex-flow: column;
+			align-items: flex-end;
+			padding-right: var(--section-line_spacing);
+
+			// 終了地点
+			position: relative;
+
+			.active {
+				position: absolute;
+				bottom: 50%;
+				left: calc(100% + var(--a) * var(--line_spacing) - var(--line_width) / 2);
+				width: calc(var(--line_width) * 2);
+				height: 100vh;
+				background: #fff;
+				z-index: 0;
+			}
+
+			* {
+				text-align: right;
+			}
+
+			h2 {
+				font-size: 1.5em;
+			}
+		}
+
+		position: relative;
+
+		.term_border {
+
+			.dot {
+				--dotSize: calc(var(--size) * .5em);
+
+				position: absolute;
+				bottom: calc(var(--dotSize) / -2 + var(--line_width) / 2);
+				left: calc(var(--dotSize) / -2 - var(--line_width) / 2);
+				z-index: 1;
+
+				height: var(--dotSize);
+				width: var(--dotSize);
+				border-radius: 100%;
+				background: var(--c);
+			}
+
+			position: absolute;
+			top: .5em;
+			left: 100%;
+			transform:translateY(-100%);
+
+			--w: calc(var(--no) * var(--line_spacing));
+			width: var(--w);
+			height: calc(var(--w) * var(--line_curvature));
+
+			&:before,
+			&:after {
+				content: "";
+				width: 100%;
+				border-color: var(--c);
+				border-right-style: solid;
+				border-right-width: var(--line_width);
+				position: absolute;
+			}
+
+			&:before {
+				// line
+				bottom: 100%;
+				height: calc((500% + var(--section_spacing)) * (var(--max) + .5));
+			}
+
+			&:after {
+				// curve
+				bottom: 0;
+				left: 0;
+				height: 100%;
+				border-bottom-style: solid;
+				border-bottom-width: var(--line_width);
+				border-bottom-right-radius: 100%;
+			}
+		}
+	}
+}

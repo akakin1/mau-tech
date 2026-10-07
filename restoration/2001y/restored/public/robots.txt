@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://2001y.me
+
+# Sitemaps
+Sitemap: https://2001y.me/sitemap.xml

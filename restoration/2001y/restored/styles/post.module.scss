@@ -1,0 +1,265 @@
+.h1 {
+	width: fit-content;
+	max-width: calc(100vw - $main_padding * 2);
+	word-wrap: break-word;
+	margin: auto;
+
+	@media (max-width: 500px) {
+		padding: 0;
+	}
+}
+
+.meta {
+	width: fit-content;
+	margin: auto;
+	margin-top: calc($main_marginTop + 4rem);
+	margin-bottom: 5rem;
+
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	gap: 1rem;
+
+	@media (max-width: 800px) {
+		margin-top: $main_padding;
+		margin-bottom: $main_padding;
+	}
+
+	.metaData {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1em;
+
+		time {
+			display: block;
+			&::before {
+				font-family: var(--baseFont_monospace), var(--baseFont);
+				opacity: 0.3;
+			}
+		}
+	}
+}
+
+.article {
+	font-size: 1.1rem;
+	max-width: $main_width;
+	margin: auto;
+	margin-bottom: 20vh;
+
+	line-height: 1.8em;
+	letter-spacing: 0.07em;
+
+	&::before {
+		content: "";
+		background: var(--c_bg_body);
+		position: absolute;
+		top: calc(-1 * $main_marginTop);
+		left: 0;
+		height: calc(100% + $main_marginTop);
+		width: 100vw;
+		z-index: -1;
+	}
+
+	&::after {
+		content: "";
+		background: rgba(var(--c_bg_body_reversal_rgb), 0.3);
+		width: 100vw;
+		// height: 20vh;
+		position: absolute;
+		bottom: calc(-1 * $main_marginTop);
+		left: 0;
+		z-index: -1;
+	}
+
+	>div>*:not(:last-child, h2, h3, h4, h5, h6, a) {
+		margin-bottom: 1.5em;
+	}
+
+	p {
+
+		// <b>もデザイン
+		code {
+			// background: rgba(var(--c_font_rgb), 0.03);
+			padding: 0.2em;
+			// margin: 0 0.1em;
+			opacity: 0.5;
+
+			&::before,
+			&::after {
+				content: "`";
+				opacity: 0.3;
+			}
+		}
+	}
+
+	code {
+		font-size: 0.935em; //サイズ調整
+		font-family: var(--baseFont_monospace), var(--baseFont);
+		letter-spacing: 0;
+	}
+
+	pre {
+		font-size: 0.85em; //サイズ調整
+		background: rgba(var(--c_font_rgb), 0.03);
+		$overMargin: 3rem;
+		--overMargin: #{$overMargin};
+
+		@media (max-width: calc($main_width + $overMargin * 2)) {
+			--overMargin: #{$main_padding};
+		}
+
+		--width: calc(100% + var(--overMargin) * 2);
+		--margin: calc(-1 * var(--overMargin));
+		min-width: var(--width);
+		margin-right: var(--margin);
+		margin-left: var(--margin);
+
+		overflow: hidden;
+		overflow-x: auto;
+		padding: 1.8rem 0;
+
+		// スクロールの余白確保
+		display: flex;
+
+		&::before,
+		&::after {
+			content: "";
+			min-width: var(--overMargin);
+			min-height: 100%;
+		}
+
+		code {
+			min-width: fit-content;
+			display: block;
+		}
+	}
+
+	a {
+		color: var(--gradient_1);
+		transition: 0.2s color;
+		will-change: color;
+		display: inline-block;
+		word-break: break-all;
+		position: relative;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 1.15em;
+			left: 0;
+			width: 100%;
+			height: 0.03em;
+			will-change: transform, background;
+			transition: transform 0.3s, background 0.05s;
+			transform: scale(0, 1);
+			transform-origin: left top;
+			background: var(--gradient_1);
+			z-index: -1;
+		}
+
+		@include hover {
+			&::after {
+				transform: scale(1, 1);
+			}
+		}
+	}
+
+	table {
+		font-size: 0.8em;
+		margin: 0 auto;
+		border-collapse: collapse;
+
+		td,
+		th {
+			padding: 0.2em 1em;
+		}
+
+		th {
+			font-weight: 800;
+			border-bottom: solid 1px;
+			color: var(--c_font_reversal);
+			background: var(--c_font);
+
+			&>*+* {
+				border-left: solid 1px;
+			}
+		}
+
+		tr:nth-child(odd) td {
+			background: rgba(var(--c_font_rgb), 0.03);
+		}
+	}
+
+	ul {
+		list-style-type: "-  ";
+		list-style-position: outside;
+		margin-left: 1.5em;
+		display: flex;
+		flex-flow: column;
+
+		// gap: 0.8em;
+		li {
+			margin: 0.4em 0;
+			line-height: 1.3em;
+		}
+	}
+
+	ol {
+		counter-reset: number 0;
+
+		li {
+			counter-increment: number 1;
+
+			&::before {
+				content: counter(number) ". ";
+			}
+		}
+	}
+
+	blockquote {
+		background: rgba(var(--c_bg_body_reversal_rgb), 0.03);
+		margin: 0 -3rem;
+		padding: 1.8rem 3rem;
+
+		>*:first-child {
+			margin-top: 0;
+		}
+	}
+
+	iframe {
+		width: 100%;
+		border: none;
+	}
+
+	$_headers: (
+		h2 1.6em '##',
+		h3 1.4em '###',
+		h4 1.2em '####',
+		h5 1.1em '#####'
+	);
+
+@each $tag,
+$size,
+$symbol in $_headers {
+	#{$tag} {
+		font-weight: bold;
+		font-size: $size;
+		letter-spacing: calc(0.1em + 0.005rem);
+		line-height: 1em;
+		margin-top: 1.3em;
+		margin-bottom: 1em;
+
+		&::before {
+			content: '#{$symbol}';
+			font-family: var(--baseFont_monospace), var(--baseFont);
+			font-weight: bold;
+			font-size: 0.5em;
+			display: block;
+			opacity: 0.3;
+			letter-spacing: 0.1em;
+		}
+	}
+}
+
+}

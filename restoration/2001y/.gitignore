@@ -1,0 +1,11 @@
+node_modules/
+restored/node_modules/
+restored/.next/
+restored/out/
+restored/tsconfig.tsbuildinfo
+/dist/
+/out/
+.DS_Store
+*.tar.gz
+*.tar
+*.log

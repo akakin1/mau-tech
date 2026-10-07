@@ -1,0 +1,19 @@
+.box {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 300px));
+	gap: 1.5rem;
+	margin: 2rem 0;
+
+	@media (max-width: 800px) {
+		grid-template-columns: minmax(0, 300px);
+	}
+}
+
+.img {
+	min-width: 0;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
